@@ -61,6 +61,10 @@ h5 {
 
 }
 
+#main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 .date-text {
   font-style: italic;
@@ -148,6 +152,10 @@ a {
   padding: 10px;
 }
 
+.flex-item {
+  display: inline;
+}
+
 .center-content {
   padding: 2.5% 5%;
 }
@@ -211,6 +219,15 @@ span {
   height: 400px;
   width: 100%;
   padding-bottom: 5%;
+}
+
+.project-img {
+  display: block;
+  margin: 0 auto;
+}
+
+#online-courses-header {
+  margin: 20px 0 -10px 0;
 }
 
 @media only screen and (min-width: 750px) {
