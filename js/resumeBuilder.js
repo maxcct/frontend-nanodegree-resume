@@ -82,13 +82,15 @@ var projects = {
 			"title" : "Multi-User Blog",
 			"dates" : "Dec 2016",
 			"description" : "Built using Python, Jinja2, HTML/CSS and Google App Engine. Used cookies, hashing and the Cloud Datastore to enable authenticated and authorised use of post, comment, edit, delete, ‘like’ and other functionality by multiple users.",
-			"images" : "images/blog.jpg"
+			"images" : "images/blog.jpg",
+			"url" : "https://hwapp123.appspot.com/blog"
 		},
 		{
 			"title" : "Tournament Simulator",
 			"dates" : "Oct 2016",
 			"description" : "Created a program that simulates ‘Swiss-system’ tournaments involving any number of participants and stores the results in a database, using Python, PostgreSQL and Vagrant. Implemented ‘bye’ system to allow for odd numbers of players; systems to pair players randomly in the first round then according to the Swiss system subsequently; system to rank tied players according to the total number of wins accumulated by their respective opponents so far in the tournament.",
-			"images" : "images/swiss.jpg"
+			"images" : "images/swiss.jpg",
+			"url" : "https://github.com/maxcct/tournament"
 		}
 	] 
 }
@@ -96,7 +98,8 @@ var projects = {
 projects.display = function() {
 	for (i = 0; i < projects.projects.length; i++) {
 		$("#projects").append(HTMLprojectStart);
-		var formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects.projects[i].title);
+		var partiallyFormattedProjectTitle = HTMLprojectTitle.replace('%data%', projects.projects[i].title);
+		var formattedProjectTitle = partiallyFormattedProjectTitle.replace('#', projects.projects[i].url);
 		var formattedProjectDates = HTMLprojectDates.replace('%data%', projects.projects[i].dates);
 		var formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects.projects[i].description);
 		var formattedProjectImage = HTMLprojectImage.replace('%data%', projects.projects[i].images);
