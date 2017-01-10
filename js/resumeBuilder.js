@@ -12,6 +12,34 @@ var bio = {
 	"skills" : ["Python", "Ruby", "JavaScript", "SQL", "HTML/CSS"]
 }
 
+bio.display = function() {
+	var formattedName = HTMLheaderName.replace('%data%', bio.name);
+	var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
+	var formattedPhoto = HTMLbioPic.replace('%data%', bio.biopic);
+	$("#header").prepend(formattedPhoto);
+	$("#header").prepend(bio.displayContactInfo());
+	$("#header").prepend(formattedName + formattedRole);
+}
+
+bio.displayContactInfo = function() {
+	var formattedContactInfo = "<ul>";
+    formattedContactInfo += HTMLmobile.replace('%data%', bio.contacts.mobile);
+    formattedContactInfo += HTMLemail.replace('%data%', bio.contacts.email);
+    formattedContactInfo += HTMLgithub.replace('%data%', bio.contacts.github);
+    formattedContactInfo += HTMLlocation.replace('%data%', bio.contacts.location[0]);
+    formattedContactInfo += "</ul>";
+    return formattedContactInfo;
+}
+
+bio.displaySkills = function() {
+	$("#header").append(HTMLskillsStart);
+	formattedSkills = "";
+	for (i = 0; i < bio.skills.length; i++) { 
+    	formattedSkills += HTMLskills.replace('%data%', bio.skills[i]);
+    }
+    $("#skills").append(formattedSkills);
+}
+
 var work = {
 	"jobs" : [
 		{
@@ -34,6 +62,18 @@ var work = {
 			"description" : "Coordinated editorial for Greater London and Surrey (formerly Northern England). Was responsible for dozens of features a day, involving the collaboration of many people in various roles companywide. Liaised with other departments to ensure deadlines were met, errors minimised and revenues maximised."
 		}	
 	]
+}
+
+work.display = function() {
+	for (i = 0; i < work.jobs.length; i++) {
+		$("#workExperience").append(HTMLworkStart);
+		var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
+		var formattedWorkTitle = HTMLworkTitle.replace('%data%', work.jobs[i].title);
+		var formattedWorkDates = HTMLworkDates.replace('%data%', work.jobs[i].dates);
+		var formattedWorkDescription = HTMLworkDescription.replace('%data%', work.jobs[i].description);
+		var formattedWorkInfo = formattedEmployer + formattedWorkTitle + formattedWorkDates + formattedWorkDescription;
+		$(".work-entry:last").append(formattedWorkInfo);
+	}
 }
 
 var projects = {
@@ -107,60 +147,13 @@ education.display = function() {
 	}
 }
 
-var formattedName = HTMLheaderName.replace('%data%', bio.name);
-var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
-var formattedPhoto = HTMLbioPic.replace('%data%', bio.biopic);
-var formattedWelcome = HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage);
-
-function displaySkills() {
-	if (bio.skills.length > 0) {
-		$("#header").append(HTMLskillsStart);
-		formattedSkills = "";
-		for (i = 0; i < bio.skills.length; i++) { 
-	    	formattedSkills += HTMLskills.replace('%data%', bio.skills[i]);
-	    }
-	    $("#skills").append(formattedSkills);
-    }
-}
-
-function displayWork(job) {
-	$("#workExperience").append(HTMLworkStart);
-	var formattedEmployer = HTMLworkEmployer.replace('%data%', job.employer);
-	var formattedWorkTitle = HTMLworkTitle.replace('%data%', job.title);
-	var formattedWorkDates = HTMLworkDates.replace('%data%', job.dates);
-	var formattedWorkDescription = HTMLworkDescription.replace('%data%', job.description);
-	var formattedWorkInfo = formattedEmployer + formattedWorkTitle + formattedWorkDates + formattedWorkDescription;
-	$(".work-entry:last").append(formattedWorkInfo);
-}
-
-function displayContactInfo() {
-	var formattedContactInfo = "<ul>";
-    formattedContactInfo += HTMLmobile.replace('%data%', bio.contacts.mobile);
-    formattedContactInfo += HTMLemail.replace('%data%', bio.contacts.email);
-    formattedContactInfo += HTMLgithub.replace('%data%', bio.contacts.github);
-    formattedContactInfo += HTMLlocation.replace('%data%', bio.contacts.location[0]);
-    formattedContactInfo += "</ul>";
-    return formattedContactInfo;
-}
-
-function inName() {
-	names = bio.name.split(" ");
-	surname = names[1].toUpperCase();
-	name = names[0].slice(0,1).toUpperCase() + names[0].slice(1).toLowerCase();
-	return name + " " + surname;
-}
-
 $(document).click(function(loc) {
 	logClicks(loc.pageX,loc.pageY);
 });
 
-$("#header").prepend(formattedPhoto);
-$("#header").prepend(displayContactInfo());
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
-displaySkills();
-work.jobs.forEach(displayWork);
-$("#main").append(internationalizeButton);
+bio.display();
+bio.displaySkills();
+work.display();
 projects.display();
 education.display();
 $("#mapDiv").append(googleMap);
