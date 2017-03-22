@@ -1,47 +1,31 @@
-var bio = {
-	"name" : "Max Compton",
-	"role" : "Software Engineer",
-	"welcomeMessage" : "Welcome to Max's CV",
-	"biopic" : "images/leap.jpg",		
-	"contacts" : {
-		"mobile" : "55 2183 8926",
-		"email" : "maxcct@cantab.net",
-		"github" : "maxcct",
-		"location" : ["Mexico City", "Cusco, Peru", "Sucre, Bolivia", "London, UK", "Hong Kong", "Bristol, UK"]
+var model = {
+	bio: {
+		"name" : "Max Compton",
+		"role" : "Software Engineer",
+		"welcomeMessage" : "Welcome to Max's CV",
+		"biopic" : "images/leap.jpg",		
+		"contacts" : {
+			"mobile" : "55 2183 8926",
+			"email" : "maxcct@cantab.net",
+			"github" : "maxcct",
+			"location" : ["Mexico City", "Cusco, Peru", "Sucre, Bolivia", "London, UK", "Hong Kong", "Bristol, UK"]
+		},
+		"skills" : ["Python", "JavaScript", "SQL", "HTML/CSS"],
 	},
-	"skills" : ["Python", "Ruby", "JavaScript", "SQL", "HTML/CSS"]
-}
 
-bio.display = function() {
-	var formattedName = HTMLheaderName.replace('%data%', bio.name);
-	var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
-	var formattedPhoto = HTMLbioPic.replace('%data%', bio.biopic);
-	$("#header").prepend(formattedPhoto);
-	$("#header").prepend(bio.displayContactInfo());
-	$("#header").prepend(formattedName + formattedRole);
-}
-
-bio.displayContactInfo = function() {
-	var formattedContactInfo = "<ul>";
-    formattedContactInfo += HTMLmobile.replace('%data%', bio.contacts.mobile);
-    formattedContactInfo += HTMLemail.replace('%data%', bio.contacts.email);
-    formattedContactInfo += HTMLgithub.replace('%data%', bio.contacts.github);
-    formattedContactInfo += HTMLlocation.replace('%data%', bio.contacts.location[0]);
-    formattedContactInfo += "</ul>";
-    return formattedContactInfo;
-}
-
-bio.displaySkills = function() {
-	$("#header").append(HTMLskillsStart);
-	formattedSkills = "";
-	for (i = 0; i < bio.skills.length; i++) { 
-    	formattedSkills += HTMLskills.replace('%data%', bio.skills[i]);
-    }
-    $("#skills").append(formattedSkills);
-}
-
-var work = {
-	"jobs" : [
+	work: [
+		{
+			"employer" : "Wildcat Dispatches: For Dangerous Times",
+			"title" : "Executive Editor and Webmaster",
+			"dates" : "Nov 2016 to present",
+			"description" : "Co-founded this new web-based political magazine, and administer its <a id='unstyled' href='http://www.wildcatdispatches.org'>website</a> via Wordpress."
+		},
+		{
+			"employer" : "Verso Books",
+			"title" : "Freelance Editor",
+			"dates" : "Oct 2016 to Jan 2017",
+			"description" : "Prepared Priyamvada Gopal's book <em>Insurgent Empire</em> for publication."
+		},
 		{
 			"employer" : "wordy.com",
 			"title" : "Editor",
@@ -60,24 +44,17 @@ var work = {
 			"location" : "London, UK",
 			"dates" : "Apr 2011 to Sep 2014",
 			"description" : "Coordinated editorial for Greater London and Surrey (formerly Northern England). Was responsible for dozens of features a day, involving the collaboration of many people in various roles companywide. Liaised with other departments to ensure deadlines were met, errors minimised and revenues maximised."
-		}	
-	]
-}
+		}
+	],
 
-work.display = function() {
-	for (i = 0; i < work.jobs.length; i++) {
-		$("#workExperience").append(HTMLworkStart);
-		var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
-		var formattedWorkTitle = HTMLworkTitle.replace('%data%', work.jobs[i].title);
-		var formattedWorkDates = HTMLworkDates.replace('%data%', work.jobs[i].dates);
-		var formattedWorkDescription = HTMLworkDescription.replace('%data%', work.jobs[i].description);
-		var formattedWorkInfo = formattedEmployer + formattedWorkTitle + formattedWorkDates + formattedWorkDescription;
-		$(".work-entry:last").append(formattedWorkInfo);
-	}
-}
-
-var projects = {
-	"projects" : [
+	projects: [
+		{
+			"title" : "NGO Emporium",
+			"dates" : "Jan 2017",
+			"description" : "Database-backed web application with user authorisation and authentication. Built using Python, JavaScript/jQuery, Flask, SQLAlchemy, OAuth 2.",
+			"images" : "images/ngos.jpg",
+			"url" : "https://github.com/maxcct/catalog"			
+		},
 		{
 			"title" : "Multi-User Blog",
 			"dates" : "Dec 2016",
@@ -92,71 +69,167 @@ var projects = {
 			"images" : "images/swiss.jpg",
 			"url" : "https://github.com/maxcct/tournament"
 		}
-	] 
-}
-
-projects.display = function() {
-	for (i = 0; i < projects.projects.length; i++) {
-		$("#projects").append(HTMLprojectStart);
-		var partiallyFormattedProjectTitle = HTMLprojectTitle.replace('%data%', projects.projects[i].title);
-		var formattedProjectTitle = partiallyFormattedProjectTitle.replace('#', projects.projects[i].url);
-		var formattedProjectDates = HTMLprojectDates.replace('%data%', projects.projects[i].dates);
-		var formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects.projects[i].description);
-		var formattedProjectImage = HTMLprojectImage.replace('%data%', projects.projects[i].images);
-		var formattedProjectInfo = formattedProjectTitle + formattedProjectDates + formattedProjectDescription + formattedProjectImage;
-		$(".project-entry:last").append(formattedProjectInfo);
-	}
-}
-
-var education = {
-	"schools" : {
-		"name" : "University of Cambridge",
-		"location" : "Cambridge, UK",
-		"degree" : "Master of Arts (Cantab) in English",
-		"dates" : "2007 to 2010",
-	},
-	"onlineCourses" : [
-		{
-			"title" : "Full-Stack Web Developer",
-			"school" : "Udacity",
-			"dates" : "Dec 2016 to present",
-			"url" : "https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004"
+	],
+	education: {
+		"university" : {
+			"name" : "University of Cambridge",
+			"location" : "Cambridge, UK",
+			"degree" : "Master of Arts (Cantab) in English",
+			"dates" : "2007 to 2010",
 		},
-		{
-			"title" : "Intoduction to Programming",
-			"school" : "Udacity",
-			"dates" : "Oct 2016",
-			"url" : "https://www.udacity.com/course/intro-to-programming-nanodegree--nd000"
-		}
-	]
-}
-
-education.display = function() {
-	$("#education").append(HTMLschoolStart);
-	var formattedSchoolName = HTMLschoolName.replace('%data%', education.schools.name);
-	var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools.degree);
-	var formattedSchoolDates = HTMLschoolDates.replace('%data%', education.schools.dates);
-	var formattedSchoolInfo = formattedSchoolName + formattedDegree + formattedSchoolDates;
-	$(".education-entry").append(formattedSchoolInfo);	
-	$("#education").append(HTMLonlineClasses);
-	for (i = 0; i < education.onlineCourses.length; i++) {
-		$("#education").append(HTMLschoolStart);
-		var partiallyFormattedCourseTitle = HTMLonlineTitle.replace('%data%', education.onlineCourses[i].title);
-		var formattedCourseTitle = partiallyFormattedCourseTitle.replace('#', education.onlineCourses[i].url)
-		var formattedCourseSchool = HTMLonlineSchool.replace('%data%', education.onlineCourses[i].school);
-		var formattedCourseDates = HTMLonlineDates.replace('%data%', education.onlineCourses[i].dates);
-		var formattedOnlineCourseInfo = formattedCourseTitle + formattedCourseSchool + formattedCourseDates + "<br>";
-		$(".education-entry:last").append(formattedOnlineCourseInfo);
+		"onlineCourses" : [
+			{
+				"title" : "Full-Stack Web Developer",
+				"school" : "Udacity",
+				"dates" : "Dec 2016 to present",
+				"url" : "https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004"
+			},
+			{
+				"title" : "Machine Learning",
+				"school" : "Stanford University",
+				"dates" : "Feb 2017 to present",
+				"url" : "https://www.coursera.org/learn/machine-learning/home/welcome"
+			},
+			{
+				"title" : "Introduction to Computer Science and Programming Using Python",
+				"school" : "MIT",
+				"dates" : "Jan 2017 to present",
+				"url" : "https://courses.edx.org/courses/course-v1:MITx+6.00.1x_11+1T2017"
+			},
+			{
+				"title" : "Intoduction to Programming",
+				"school" : "Udacity",
+				"dates" : "Oct 2016",
+				"url" : "https://www.udacity.com/course/intro-to-programming-nanodegree--nd000"
+			}
+		]
 	}
-}
+};
 
-$(document).click(function(loc) {
-	logClicks(loc.pageX,loc.pageY);
+
+$(document).ready(function() {
+	var controller = {
+		bio: {
+			formatNameandRole: function() {
+				formattedName = HTMLheaderName.replace('%data%', model.bio.name);
+				formattedRole = HTMLheaderRole.replace('%data%', model.bio.role);
+				return formattedName + formattedRole;
+			},
+			formatPhoto: function() {
+				return formattedPhoto = HTMLbioPic.replace('%data%', model.bio.biopic);
+			},
+			formatContactInfo: function() {
+				var formattedContactInfo = "<ul>";
+			    formattedContactInfo += HTMLmobile.replace('%data%', model.bio.contacts.mobile);
+			    formattedContactInfo += HTMLemail.replace('%data%', model.bio.contacts.email);
+			    formattedContactInfo += HTMLgithub.replace('%data%', model.bio.contacts.github);
+			    formattedContactInfo += HTMLlocation.replace('%data%', model.bio.contacts.location[0]);
+			    formattedContactInfo += "</ul>";
+			    return formattedContactInfo;
+			},
+			formatSkills: function() {
+				formattedSkills = "";
+				for (i = 0; i < model.bio.skills.length; i++) { 
+			    	formattedSkills += HTMLskills.replace('%data%', model.bio.skills[i]);
+			    };
+			    return formattedSkills;
+			}
+		},
+		work: {
+			formatJobs: function() {
+				var formattedJobs = [];
+				for (job in model.work) {
+					var formattedEmployer = HTMLworkEmployer.replace('%data%', model.work[job].employer);
+					var formattedWorkTitle = HTMLworkTitle.replace('%data%', model.work[job].title);
+					var formattedWorkDates = HTMLworkDates.replace('%data%', model.work[job].dates);
+					var formattedWorkDescription = HTMLworkDescription.replace('%data%', model.work[job].description);
+					var formattedWorkInfo = formattedEmployer + formattedWorkTitle + formattedWorkDates + formattedWorkDescription;
+					formattedJobs.push(formattedWorkInfo);
+				};
+				return formattedJobs;
+			}
+		},
+		projects: {
+			formatProjects: function() {
+				var formattedProjects = [];
+				for (project in model.projects) {
+					var partiallyFormattedProjectTitle = HTMLprojectTitle.replace('%data%', model.projects[project].title);
+					var formattedProjectTitle = partiallyFormattedProjectTitle.replace('#', model.projects[project].url);
+					var formattedProjectDates = HTMLprojectDates.replace('%data%', model.projects[project].dates);
+					var formattedProjectDescription = HTMLprojectDescription.replace('%data%', model.projects[project].description);
+					var formattedProjectImage = HTMLprojectImage.replace('%data%', model.projects[project].images);
+					var formattedProjectInfo = formattedProjectTitle + formattedProjectDates + formattedProjectDescription + formattedProjectImage;	
+					formattedProjects.push(formattedProjectInfo);
+				};
+				return formattedProjects;
+			}
+		},
+		education: {
+			formatUniversity: function() {
+				var formattedUniName = HTMLschoolName.replace('%data%', model.education.university.name);
+				var formattedDegree = HTMLschoolDegree.replace('%data%', model.education.university.degree);
+				var formattedUniDates = HTMLschoolDates.replace('%data%', model.education.university.dates);
+				var formattedUniInfo = formattedUniName + formattedDegree + formattedUniDates;
+				return formattedUniInfo;
+			},
+			formatOnlineCourses: function() {		
+				var formattedOnlineCourses = [];
+				for (course in model.education.onlineCourses) {
+					var partiallyFormattedCourseTitle = HTMLonlineTitle.replace('%data%', model.education.onlineCourses[course].title);
+					var formattedCourseTitle = partiallyFormattedCourseTitle.replace('#', model.education.onlineCourses[course].url)
+					var formattedCourseSchool = HTMLonlineSchool.replace('%data%', model.education.onlineCourses[course].school);
+					var formattedCourseDates = HTMLonlineDates.replace('%data%', model.education.onlineCourses[course].dates);
+					var formattedOnlineCourseInfo = formattedCourseTitle + formattedCourseSchool + formattedCourseDates + "<br>";
+					formattedOnlineCourses.push(formattedOnlineCourseInfo);
+				};
+				return formattedOnlineCourses;
+			}
+		},
+		init: function() {
+			view.init();
+		}
+	};
+
+	var view = {
+		displayBio: function() {
+			console.log('test');
+			$("#header").prepend(controller.bio.formatPhoto());
+			$("#header").prepend(controller.bio.formatContactInfo());
+			$("#header").prepend(controller.bio.formatNameandRole());		
+			$("#header").append(HTMLskillsStart);
+			$("#skills").append(controller.bio.formatSkills());
+		},
+		displayWork: function() {
+			var jobs = controller.work.formatJobs()
+			for (job in jobs) {
+				$("#workExperience").append(HTMLworkStart);
+				$(".work-entry:last").append(jobs[job]);
+			};
+		},
+		displayProjects: function() {
+			var projects = controller.projects.formatProjects()
+			for (project in projects) {
+				$("#projects").append(HTMLprojectStart);
+				$(".project-entry:last").append(projects[project]);
+			};
+		},
+		displayEducation: function() {
+			$("#education").append(HTMLschoolStart);
+			$(".education-entry").append(controller.education.formatUniversity());
+			$("#education").append(HTMLonlineClasses);
+			var courses = controller.education.formatOnlineCourses();
+			for (course in courses) {
+				$("#education").append(HTMLschoolStart);
+				$(".education-entry:last").append(courses[course]);
+			};
+		},
+		init: function() {
+			this.displayBio();
+			this.displayWork();
+			this.displayProjects();
+			this.displayEducation();
+			$("#mapDiv").append(googleMap);
+		}
+	};
+	controller.init();
 });
-
-bio.display();
-bio.displaySkills();
-work.display();
-projects.display();
-education.display();
-$("#mapDiv").append(googleMap);
